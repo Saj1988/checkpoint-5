@@ -8,10 +8,10 @@ def read_phonelist(C):
     rows = cur.fetchall()
     cur.close()
     return rows
-def read_name(C, name):
+def read_name(C, phone):
     cur = C.cursor()
     print(f"SELECT name FROM phonelist WHERE phone = '{phone}';")
-    cur.execute(f"SELECT name FROM phonelist WHERE name = '{name}';")
+    cur.execute(f"SELECT name FROM phonelist WHERE phone = '{phone}';")
     rows = cur.fetchall()
     cur.close()
     return rows
@@ -85,8 +85,8 @@ def api_func():
         if len(phone) < 1:
             return "not found"
         return phone[0][0]
-     elif action == 'name':
-        phone == args.get('phone', default="No name", type=str)
+    elif action == 'name':
+        phone = args.get('phone', default="No phone")
         if phone =="No phone":
          return render_template('api_usage.html', action=action)   
         name = read_name(conn, phone)
